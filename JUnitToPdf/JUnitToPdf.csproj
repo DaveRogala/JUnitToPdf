@@ -1,44 +1,44 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <OutputType>exe</OutputType>
-	  <TargetFramework>net10.0</TargetFramework>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <Nullable>enable</Nullable>
+    <OutputType>exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
 
-	  <!-- Pack as dotnet tool -->
-	  <PackAsTool>true</PackAsTool>
-	  <ToolCommandName>junit-to-pdf</ToolCommandName>
+    <!-- Pack as dotnet tool -->
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>junit-to-pdf</ToolCommandName>
 
-	  <!-- Package metadata -->
-	  <PackageId>JUnitToPdf</PackageId>
-	  <Version>1.0.0</Version>
-	  <Authors>Dave Rogala</Authors>
-	  <Description>Convert JUnit XML test results to a styled PDF report.</Description>
-	  <PackageOutputPath>./nupkg</PackageOutputPath>
+    <!-- Package metadata -->
+    <PackageId>JUnitToPdf</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Dave Rogala</Authors>
+    <Description>Convert JUnit XML test results to a styled PDF report.</Description>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+  </PropertyGroup>
 
-	</PropertyGroup>
-	<ItemGroup>
-		<!-- Copy Nickel City fonts to output directory -->
-		<Content Include="Nickel City\**\*.otf">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
+  <ItemGroup>
+    <!--
+      Embed Nickel City fonts directly into the assembly so they are always
+      available regardless of how the tool is deployed (dotnet run, global tool,
+      single-file publish, etc.). LogicalName=%(Filename)%(Extension) keeps the
+      resource name equal to the bare filename so the resolver can derive the
+      face key with a simple Path.GetFileNameWithoutExtension call.
+    -->
+    <EmbeddedResource Include="Nickel City\**\*.otf">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nickel City\**\*.ttf">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
 
-		<Content Include="Nickel City\**\*.ttf">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-
-	<PropertyGroup>
-	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-	</PropertyGroup>
-
-
-	<ItemGroup>
+  <ItemGroup>
     <PackageReference Include="MigraDocCore.DocumentObjectModel" Version="1.3.67" />
-    <PackageReference Include="MigraDocCore.Rendering" Version="1.3.67" />
-    <PackageReference Include="PdfSharpCore" Version="1.3.67" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
+    <PackageReference Include="MigraDocCore.Rendering"           Version="1.3.67" />
+    <PackageReference Include="PdfSharpCore"                     Version="1.3.67" />
+    <PackageReference Include="SixLabors.ImageSharp"             Version="3.1.12" />
   </ItemGroup>
 
 </Project>

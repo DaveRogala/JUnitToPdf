@@ -129,12 +129,15 @@ var groups = testcases
     .ToList();
 
 // ----- Font selection / fallback -----
-var fontDir  = Path.Combine(AppContext.BaseDirectory, "Nickel City");
-var resolver = new NickelCityFontResolver(fontDir);
+// Fonts are embedded in the assembly so they are always available regardless of
+// deployment method (dotnet run, global tool install, single-file publish, etc.).
+var resolver = new NickelCityFontResolver();
 bool nickelAvailable = resolver.HasFonts;
 
-if (nickelAvailable && GlobalFontSettings.FontResolver is null)
+if (nickelAvailable)
     GlobalFontSettings.FontResolver = resolver;
+else
+    Console.Error.WriteLine("warning: Nickel City fonts could not be loaded from assembly resources; using Helvetica fallback.");
 
 string baseFont   = nickelAvailable ? "Nickel City" : "Helvetica";
 string bulletFont = "Helvetica"; // force bullets to a reliable glyph set
