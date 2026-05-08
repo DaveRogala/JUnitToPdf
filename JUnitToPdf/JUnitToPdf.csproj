@@ -16,6 +16,7 @@
     <Authors>Dave Rogala</Authors>
     <Description>Convert JUnit XML test results to a styled PDF report.</Description>
     <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,6 +33,10 @@
     <EmbeddedResource Include="Nickel City\**\*.ttf">
       <LogicalName>%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
