@@ -373,14 +373,23 @@ if (failedTests.Count > 0)
     }
 }
 
-// Footer — MigraDoc renders footer paragraphs bottom-to-top, so add page number
-// first (it ends up at the very bottom) and CI metadata second (it sits above).
-section.Footers.Primary.AddParagraph()
-    .AddPageField();
+// Footer — borderless table keeps CI metadata and page number on the same line,
+// avoiding the overlap that occurs with stacked paragraphs.
+var footer = section.Footers.Primary.AddTable();
+footer.Borders.Width = 0;
+footer.AddColumn(Unit.FromCentimeter(13.4));
+footer.AddColumn(Unit.FromCentimeter(4.0));
 
-section.Footers.Primary.AddParagraph(
-        $"CI Pipeline: {pipeline}  Branch: {branch}  Commit: {commit}")
-    .Style = "Small";
+var fRow = footer.AddRow();
+
+var ciPara = fRow.Cells[0].AddParagraph(
+    $"CI Pipeline: {pipeline}  Branch: {branch}  Commit: {commit}");
+ciPara.Style = "Small";
+
+var pgPara = fRow.Cells[1].AddParagraph();
+pgPara.Style = "Small";
+pgPara.Format.Alignment = ParagraphAlignment.Right;
+pgPara.AddPageField();
 
 var pdfRenderer = new PdfDocumentRenderer(unicode: true) { Document = doc };
 pdfRenderer.RenderDocument();
