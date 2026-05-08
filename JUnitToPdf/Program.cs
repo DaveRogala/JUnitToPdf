@@ -370,13 +370,14 @@ if (failedTests.Count > 0)
     }
 }
 
-// Footer (pipeline metadata + page numbers)
+// Footer — MigraDoc renders footer paragraphs bottom-to-top, so add page number
+// first (it ends up at the very bottom) and CI metadata second (it sits above).
+section.Footers.Primary.AddParagraph()
+    .AddPageField();
+
 section.Footers.Primary.AddParagraph(
         $"CI Pipeline: {pipeline}  Branch: {branch}  Commit: {commit}")
     .Style = "Small";
-
-section.Footers.Primary.AddParagraph()
-    .AddPageField();
 
 var pdfRenderer = new PdfDocumentRenderer(unicode: true) { Document = doc };
 pdfRenderer.RenderDocument();
