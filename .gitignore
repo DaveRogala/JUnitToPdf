@@ -1,0 +1,19 @@
+# Build outputs
+bin/
+obj/
+
+# NuGet packages
+*.nupkg
+nupkg/
+
+# Generated artifacts
+artifacts/
+
+# IDE
+.vs/
+.idea/
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
