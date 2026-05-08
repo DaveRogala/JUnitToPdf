@@ -1,38 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Comprehensive sample JUnit XML exercising every rendered section of the PDF report.
+
+  Sections covered:
+    • Summary box          — 6 suites, 79 tests, mixed pass/fail/skip, non-trivial total time
+    • Suite summary table  — ordering by failures desc then time; red left-border rows; alternating shading
+    • Results table        — multiple classes per suite; pass / fail / skip bullets;
+                             top-5 slowest tests highlighted (orange left-border + amber time cell);
+                             alternating row shading
+    • Failures detail      — failure with message attr; failure with body-text only; <error> element;
+                             failure with long message (triggers 1600-char clip);
+                             22 total failures → exercises "first 20" cap in heading
+    • Footer               — CI metadata (set via environment variables at run time)
+
+  Slowest 5 tests (highlighted in orange):
+    1. GenerateSalesReport_LastMonth_ReturnsCorrectTotals     4.210 s  (Reporting.Analytics.Tests)
+    2. CreateOrder_ValidInput_ReturnsOrderId                  3.512 s  (OrderProcessing.Tests)
+    3. ChargeCard_ValidToken_ReturnsTransactionId             2.104 s  (PaymentGateway.Tests)
+    4. Refund_FullAmount_ReturnsSuccess                       1.812 s  (PaymentGateway.Tests)
+    5. GenerateToken_ValidClaims_ReturnsSignedJwt             0.055 s  (Auth.Identity.Tests)
+-->
 <testsuites>
-  <testsuite name="VCFFileImport.Tests.dll" tests="25" skipped="0" failures="0" errors="0" time="2.9826470999999994" timestamp="2026-05-06T19:11:13" hostname="runner-xvbjm2wrc-project-70569932-concurrent-0-9kuj4n1e" id="0" package="VCFFileImport.Tests.dll">
-    <properties />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_SupplierNameWithQuotes_IsMappedAndSavedCorrectly" time="2.5539415" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_NullableDatesPopulated_MappedToCorrectDateOnly" time="0.0265679" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_OneBadRow_SkipsBadRowSavesRemainingAndReturnsFalse" time="0.1555123" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="Constructor_WhitespaceBasePath_ThrowsVcfConfigurationException" time="0.0126608" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_InvalidRequiredDate_SkipsRowAndReportsError" time="0.0230474" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_NullableDatesEmpty_MappedToNull" time="0.0123750" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_GetDataFromFile_PassesFixUnescapedQuotesTrueAndRowsToSkipZero" time="0.0126156" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_EmptyDirectory_ReturnsTrueWithNoInteractions" time="0.0224184" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;N&quot;, expected: False)" time="0.0162469" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;Y&quot;, expected: True)" time="0.0083543" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;y&quot;, expected: False)" time="0.0089429" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;YES&quot;, expected: False)" time="0.0084227" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;&quot;, expected: False)" time="0.0061796" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_DuplicateFile_ReturnsFalseAndCallsHandleFileError" time="0.0132695" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_MultipleValidFiles_AllProcessedSuccessfully" time="0.0077407" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_AccountMask_StripsAsterisksAndParsesLastSixDigits" time="0.0070329" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_WhitespaceOptionalStrings_MappedToNull" time="0.0087397" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_AllAsterisksInMask_RowSkippedAndErrorReported" time="0.0127631" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_AllRowsBad_SavesEmptyTransactionListAndReturnsFalse" time="0.0147191" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_FileServiceParseErrors_ReturnsFalseAndReportsErrors" time="0.0198618" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="Constructor_MissingBasePath_ThrowsVcfConfigurationException" time="0.0060790" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_MixedDirectory_OnlyCsvFilesProcessed" time="0.0073534" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_SingleValidFile_ReturnsTrueAndCallsHandleFileSuccess" time="0.0072778" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_HappyPath_ImportFileHasCorrectFileNames" time="0.0072061" />
-    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_NonCsvFilesOnly_ReturnsTrueWithNoInteractions" time="0.0033187" />
-    <system-out>
-Test Framework Informational Messages:
-[xUnit.net 00:00:00.01] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.6)
-[xUnit.net 00:00:00.41]   Discovering: VCFFileImport.Tests
-[xUnit.net 00:00:01.01]   Discovered:  VCFFileImport.Tests
-[xUnit.net 00:00:01.10]   Starting:    VCFFileImport.Tests
-[xUnit.net 00:00:04.23]   Finished:    VCFFileImport.Tests
-</system-out>
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Suite 1 — OrderProcessing.Tests.dll
+       16 tests | 6 fail | 0 skip | 10 pass  time=14.232
+       Exercises: failure with message attr, failure with body-text only,
+                  one of the top-5 slow tests (CreateOrder 3.512 s)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <testsuite name="OrderProcessing.Tests.dll"
+             tests="16" failures="6" skipped="0" errors="0"
+             time="14.232">
+
+    <!-- Class: OrderProcessing.Tests.OrderServiceTests -->
+    <testcase classname="OrderProcessing.Tests.OrderServiceTests"
+              name="CreateOrder_ValidInput_ReturnsOrderId"
+              time="3.512" />
+
+    <testcase classname="OrderProcessing.Tests.OrderServiceTests"
+              name="CreateOrder_NullCustomer_ThrowsArgumentNullException"
+              time="0.012" />
+
+    <testcase classname="OrderProcessing.Tests.OrderServiceTests"
+              name="CreateOrder_EmptyCart_ReturnsValidationError"
+              time="0.023">
+      <failure message="Expected ValidationResult.IsValid=False but was True">
+Assert.Equal() Failure
+Expected: False
+Actual:   True
+      </failure>
+    </testcase>
+
+    <testcase classname="OrderProcessing.Tests.OrderServiceTests"
+              name="UpdateOrderStatus_InvalidTransition_ThrowsInvalidOperationException"
+              time="0.045">
+      <!-- failure body-text only — no message attribute; exercises body-text detail path -->
+      <failure>
+System.InvalidOperationException was expected but no exception was thrown.
+   at OrderProcessing.Tests.OrderServiceTests.UpdateOrderStatus_InvalidTransition_ThrowsInvalidOperationException()
+   in OrderServiceTests.cs:line 82
+      </failure>
+    </testcase>
+
+    <testcase classname="OrderProcessing.Tests.OrderServiceTests"
+              name="CancelOrder_AlreadyShipped_ReturnsFalse"
+              time="0.018">
+      <failure message="Expected False but got True — cancellation of a shipped order was permitted" />
+    </testcase>
+
+    <testcase classname="OrderProcessing.Tests.OrderServiceTests"
+              name="PlaceOrder_WithPromoCode_AppliesDiscount"
+              time="0.031">
+      <failure message="Expected discounted total 85.00 but calculated 100.00 — promo code SAVE15 was not applied">
+Assert.Equal() Failure
+Expected: 85.00
+Actual:   100.00
+      </failure>
+    </testcase>
+
+    <testcase classname="OrderProcessing.Tests.OrderServiceTests"
+              name="GetOrderHistory_CustomerWithNoOrders_ReturnsEmpty"
+              time="0.011" />
+
+    <!-- Class: OrderProcessing.Tests.OrderValidatorTests -->
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidateAddress_MissingPostcode_ReturnsFalse"
+              time="0.009">
+      <failure message="Expected ValidationError for missing postcode but validator returned no errors" />
+    </testcase>
+
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidateAddress_ValidUKAddress_ReturnsTrue"
+              time="0.007" />
+
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidateLineItems_NegativeQuantity_ReturnsFalse"
+              time="0.008">
+      <failure message="Negative quantity -1 passed validation; expected IsValid=False" />
+    </testcase>
+
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidateLineItems_ZeroPrice_ReturnsFalse"
+              time="0.006" />
+
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidateLineItems_ExceedsMaxQuantity_ReturnsFalse"
+              time="0.007" />
+
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidatePaymentMethod_ExpiredCard_ReturnsFalse"
+              time="0.009" />
+
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidateShippingOptions_NoOptionsAvailable_ReturnsFalse"
+              time="0.008" />
+
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidateCoupon_ExpiredCode_ReturnsFalse"
+              time="0.010" />
+
+    <testcase classname="OrderProcessing.Tests.OrderValidatorTests"
+              name="ValidateCoupon_ValidCode_ReturnsTrue"
+              time="0.007" />
   </testsuite>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Suite 2 — PaymentGateway.Tests.dll
+       10 tests | 3 fail | 1 skip | 6 pass  time=8.140
+       Exercises: skip, <failure> with long message, two of the top-5 slow tests
+                  (ChargeCard 2.104 s, Refund 1.812 s)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <testsuite name="PaymentGateway.Tests.dll"
+             tests="10" failures="3" skipped="1" errors="0"
+             time="8.140">
+
+    <!-- Class: PaymentGateway.Tests.StripeAdapterTests -->
+    <testcase classname="PaymentGateway.Tests.StripeAdapterTests"
+              name="ChargeCard_ValidToken_ReturnsTransactionId"
+              time="2.104" />
+
+    <testcase classname="PaymentGateway.Tests.StripeAdapterTests"
+              name="ChargeCard_ExpiredCard_ThrowsPaymentException"
+              time="0.034">
+      <!-- Long message — exercises Clip(details, 1600); message is ~1700 chars intentionally -->
+      <failure message="PaymentGateway.Exceptions.PaymentException was not thrown. The Stripe adapter accepted a charge request for a card that expired in 01/2023 without raising an exception. Expected behaviour: when the card expiry date is in the past relative to the transaction timestamp, the adapter must throw PaymentException with ErrorCode=CardExpired before transmitting the authorisation request to the Stripe API. This ensures that we do not incur Stripe processing fees for transactions that are guaranteed to be declined. The card details used in this test: token=tok_visa_chargeDeclinedExpiredCard, amount=99.99 GBP, currency=GBP, customer_id=cus_test_expired_001. Stack trace follows: at PaymentGateway.Adapters.StripeAdapter.ChargeAsync(ChargeRequest request) in StripeAdapter.cs:line 47, at PaymentGateway.Tests.StripeAdapterTests.ChargeCard_ExpiredCard_ThrowsPaymentException() in StripeAdapterTests.cs:line 88. Assertion: Assert.Throws&lt;PaymentException&gt;() — no exception was thrown. Additional context: the ExpiryValidator.IsExpired() helper returns True for this card but the guard clause on line 44 of StripeAdapter.cs was removed in commit a3f91bc without a corresponding test update." />
+    </testcase>
+
+    <testcase classname="PaymentGateway.Tests.StripeAdapterTests"
+              name="ChargeCard_InsufficientFunds_ThrowsPaymentException"
+              time="0.022">
+      <failure message="Expected PaymentException with ErrorCode=InsufficientFunds but got PaymentException with ErrorCode=CardDeclined" />
+    </testcase>
+
+    <testcase classname="PaymentGateway.Tests.StripeAdapterTests"
+              name="Refund_FullAmount_ReturnsSuccess"
+              time="1.812" />
+
+    <testcase classname="PaymentGateway.Tests.StripeAdapterTests"
+              name="Refund_PartialAmount_ReturnsSuccess"
+              time="0.015" />
+
+    <!-- Class: PaymentGateway.Tests.WebhookHandlerTests -->
+    <testcase classname="PaymentGateway.Tests.WebhookHandlerTests"
+              name="HandleWebhook_ValidSignature_ProcessesEvent"
+              time="0.014" />
+
+    <testcase classname="PaymentGateway.Tests.WebhookHandlerTests"
+              name="HandleWebhook_InvalidSignature_Returns401"
+              time="0.011">
+      <failure message="Expected HTTP 401 Unauthorized but got HTTP 200 OK — HMAC signature validation was bypassed" />
+    </testcase>
+
+    <testcase classname="PaymentGateway.Tests.WebhookHandlerTests"
+              name="HandleWebhook_UnknownEventType_LogsAndReturns200"
+              time="0.000">
+      <!-- skipped test — exercises skip bullet and orange skip counter -->
+      <skipped message="Not yet implemented: unknown event routing is pending RFC-42" />
+    </testcase>
+
+    <testcase classname="PaymentGateway.Tests.WebhookHandlerTests"
+              name="HandleWebhook_PaymentConfirmed_UpdatesOrder"
+              time="0.013" />
+
+    <testcase classname="PaymentGateway.Tests.WebhookHandlerTests"
+              name="HandleWebhook_PaymentFailed_SendsNotification"
+              time="0.012" />
+  </testsuite>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Suite 3 — Inventory.Core.Tests.dll
+       8 tests | 0 fail | 0 skip | 8 pass  time=1.250
+       Exercises: all-green suite (no red borders in suite summary)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <testsuite name="Inventory.Core.Tests.dll"
+             tests="8" failures="0" skipped="0" errors="0"
+             time="1.250">
+
+    <!-- Class: Inventory.Core.Tests.StockServiceTests -->
+    <testcase classname="Inventory.Core.Tests.StockServiceTests"
+              name="GetStockLevel_KnownSku_ReturnsQuantity"
+              time="0.023" />
+
+    <testcase classname="Inventory.Core.Tests.StockServiceTests"
+              name="ReserveStock_SufficientQuantity_ReturnsTrue"
+              time="0.018" />
+
+    <testcase classname="Inventory.Core.Tests.StockServiceTests"
+              name="ReserveStock_InsufficientQuantity_ReturnsFalse"
+              time="0.012" />
+
+    <testcase classname="Inventory.Core.Tests.StockServiceTests"
+              name="ReleaseReservation_ValidId_UpdatesStock"
+              time="0.019" />
+
+    <testcase classname="Inventory.Core.Tests.StockServiceTests"
+              name="BulkImport_ValidCsv_ImportsAllRows"
+              time="0.095" />
+
+    <!-- Class: Inventory.Core.Tests.WarehouseTests -->
+    <testcase classname="Inventory.Core.Tests.WarehouseTests"
+              name="GetWarehouseCapacity_ReturnsCorrectValue"
+              time="0.007" />
+
+    <testcase classname="Inventory.Core.Tests.WarehouseTests"
+              name="AllocateShelf_EmptySlot_AssignsCorrectly"
+              time="0.011" />
+
+    <testcase classname="Inventory.Core.Tests.WarehouseTests"
+              name="AllocateShelf_FullWarehouse_ThrowsCapacityException"
+              time="0.009" />
+  </testsuite>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Suite 4 — Auth.Identity.Tests.dll
+       8 tests | 0 fail | 3 skip | 5 pass  time=0.820
+       Exercises: multiple skipped tests; last of the top-5 slow tests
+                  (GenerateToken 0.055 s); all-pass suite (no red in summary)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <testsuite name="Auth.Identity.Tests.dll"
+             tests="8" failures="0" skipped="3" errors="0"
+             time="0.820">
+
+    <!-- Class: Auth.Identity.Tests.JwtTokenTests -->
+    <testcase classname="Auth.Identity.Tests.JwtTokenTests"
+              name="GenerateToken_ValidClaims_ReturnsSignedJwt"
+              time="0.055" />
+
+    <testcase classname="Auth.Identity.Tests.JwtTokenTests"
+              name="ValidateToken_ExpiredToken_ReturnsFalse"
+              time="0.022" />
+
+    <testcase classname="Auth.Identity.Tests.JwtTokenTests"
+              name="ValidateToken_TamperedSignature_ReturnsFalse"
+              time="0.019" />
+
+    <testcase classname="Auth.Identity.Tests.JwtTokenTests"
+              name="ValidateToken_ValidToken_ReturnsTrue"
+              time="0.000">
+      <skipped message="Depends on clock-skew tolerance setting not yet configurable in test harness" />
+    </testcase>
+
+    <!-- Class: Auth.Identity.Tests.PasswordHasherTests -->
+    <testcase classname="Auth.Identity.Tests.PasswordHasherTests"
+              name="HashPassword_ValidInput_ReturnsBcryptHash"
+              time="0.000">
+      <skipped />
+    </testcase>
+
+    <testcase classname="Auth.Identity.Tests.PasswordHasherTests"
+              name="VerifyPassword_CorrectPassword_ReturnsTrue"
+              time="0.031" />
+
+    <testcase classname="Auth.Identity.Tests.PasswordHasherTests"
+              name="VerifyPassword_WrongPassword_ReturnsFalse"
+              time="0.028" />
+
+    <testcase classname="Auth.Identity.Tests.PasswordHasherTests"
+              name="VerifyPassword_EmptyPassword_ThrowsArgumentException"
+              time="0.000">
+      <skipped message="Tracked in JIRA AUTH-209; fix pending" />
+    </testcase>
+  </testsuite>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Suite 5 — Reporting.Analytics.Tests.dll
+       10 tests | 5 fail | 0 skip | 5 pass  time=5.670
+       Exercises: <error> element (treated as fail), failure with body-text
+                  only, the #1 slowest test (GenerateSalesReport 4.210 s)
+  ═══════════════════════════════════════════════════════════════════ -->
+  <testsuite name="Reporting.Analytics.Tests.dll"
+             tests="10" failures="4" skipped="0" errors="1"
+             time="5.670">
+
+    <!-- Class: Reporting.Analytics.Tests.ReportGeneratorTests -->
+    <testcase classname="Reporting.Analytics.Tests.ReportGeneratorTests"
+              name="GenerateSalesReport_LastMonth_ReturnsCorrectTotals"
+              time="4.210" />
+
+    <testcase classname="Reporting.Analytics.Tests.ReportGeneratorTests"
+              name="GenerateSalesReport_EmptyPeriod_ReturnsZeroTotals"
+              time="0.033" />
+
+    <testcase classname="Reporting.Analytics.Tests.ReportGeneratorTests"
+              name="GenerateInventoryReport_ReturnsAllProducts"
+              time="0.045">
+      <!-- <error> element — exercises the error code path; treated as "fail" in the report -->
+      <error message="System.Data.SqlClient.SqlException: Cannot open database 'ReportingDb' requested by the login. Login failed." />
+    </testcase>
+
+    <testcase classname="Reporting.Analytics.Tests.ReportGeneratorTests"
+              name="ExportToCsv_ValidReport_WritesFile"
+              time="0.028">
+      <failure message="FileNotFoundException: Output path /tmp/reports does not exist and could not be created" />
+    </testcase>
+
+    <testcase classname="Reporting.Analytics.Tests.ReportGeneratorTests"
+              name="ExportToPdf_ValidReport_WritesFile"
+              time="0.034">
+      <failure message="PdfExporter threw UnauthorizedAccessException; check write permissions on output directory" />
+    </testcase>
+
+    <!-- Class: Reporting.Analytics.Tests.ChartBuilderTests -->
+    <testcase classname="Reporting.Analytics.Tests.ChartBuilderTests"
+              name="BuildBarChart_ValidData_ReturnsSvg"
+              time="0.023">
+      <!-- second <error> element in the file -->
+      <error message="NullReferenceException in SvgRenderer.Render() — DataSeries was null after deserialization" />
+    </testcase>
+
+    <testcase classname="Reporting.Analytics.Tests.ChartBuilderTests"
+              name="BuildPieChart_ValidData_ReturnsSvg"
+              time="0.015" />
+
+    <testcase classname="Reporting.Analytics.Tests.ChartBuilderTests"
+              name="BuildLineChart_EmptyDataset_ReturnsEmptyChart"
+              time="0.012" />
+
+    <testcase classname="Reporting.Analytics.Tests.ChartBuilderTests"
+              name="BuildStackedBarChart_ValidData_ReturnsSvg"
+              time="0.031">
+      <!-- failure with body-text only — no message attribute -->
+      <failure>
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at Reporting.Analytics.Charts.StackedBarChart.ComputeSegmentHeights(IList`1 series)
+   at Reporting.Analytics.Charts.ChartBuilder.BuildStackedBarChart(ChartRequest request)
+   at Reporting.Analytics.Tests.ChartBuilderTests.BuildStackedBarChart_ValidData_ReturnsSvg()
+   in ChartBuilderTests.cs:line 114
+      </failure>
+    </testcase>
+
+    <testcase classname="Reporting.Analytics.Tests.ChartBuilderTests"
+              name="BuildScatterPlot_ValidData_ReturnsSvg"
+              time="0.014" />
+  </testsuite>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       Suite 6 — CustomerPortal.Api.Tests.dll
+       11 tests | 8 fail | 0 skip | 3 pass  time=3.450
+       Exercises: highest failure count (sorts to top of suite summary);
+                  brings total failures to 22 → "first 20" cap is triggered
+  ═══════════════════════════════════════════════════════════════════ -->
+  <testsuite name="CustomerPortal.Api.Tests.dll"
+             tests="11" failures="8" skipped="0" errors="0"
+             time="3.450">
+
+    <!-- Class: CustomerPortal.Api.Tests.ProfileControllerTests -->
+    <testcase classname="CustomerPortal.Api.Tests.ProfileControllerTests"
+              name="UpdateProfile_ValidData_Returns200"
+              time="0.034">
+      <failure message="Expected HTTP 200 OK but got HTTP 500 Internal Server Error — unhandled NullReferenceException in ProfileService.UpdateAsync()" />
+    </testcase>
+
+    <testcase classname="CustomerPortal.Api.Tests.ProfileControllerTests"
+              name="UpdateProfile_MissingRequiredField_Returns400"
+              time="0.021">
+      <failure message="Expected HTTP 400 Bad Request but got HTTP 200 OK — required field validation not enforced by model binder" />
+    </testcase>
+
+    <testcase classname="CustomerPortal.Api.Tests.ProfileControllerTests"
+              name="ChangePassword_WeakPassword_Returns422"
+              time="0.018">
+      <failure message="Expected HTTP 422 Unprocessable Entity but got HTTP 200 OK — password strength policy not applied" />
+    </testcase>
+
+    <testcase classname="CustomerPortal.Api.Tests.ProfileControllerTests"
+              name="ChangePassword_SameAsCurrentPassword_Returns422"
+              time="0.016">
+      <failure message="Expected HTTP 422 but got HTTP 200 — same-as-current check is missing from PasswordChangeValidator" />
+    </testcase>
+
+    <testcase classname="CustomerPortal.Api.Tests.ProfileControllerTests"
+              name="DeleteAccount_WithActiveSubscription_Returns409"
+              time="0.019">
+      <failure message="Expected HTTP 409 Conflict but got HTTP 200 OK — active subscription guard not implemented" />
+    </testcase>
+
+    <testcase classname="CustomerPortal.Api.Tests.ProfileControllerTests"
+              name="GetProfile_AuthenticatedUser_Returns200"
+              time="0.011" />
+
+    <!-- Class: CustomerPortal.Api.Tests.SearchControllerTests -->
+    <testcase classname="CustomerPortal.Api.Tests.SearchControllerTests"
+              name="SearchProducts_ValidQuery_Returns200"
+              time="0.028">
+      <failure message="Expected HTTP 200 but got HTTP 503 — Elasticsearch client not initialised in test fixture" />
+    </testcase>
+
+    <testcase classname="CustomerPortal.Api.Tests.SearchControllerTests"
+              name="SearchProducts_EmptyQuery_Returns400"
+              time="0.013">
+      <failure message="Expected HTTP 400 Bad Request for empty q= parameter but got HTTP 200 with empty result set" />
+    </testcase>
+
+    <testcase classname="CustomerPortal.Api.Tests.SearchControllerTests"
+              name="SearchProducts_SqlInjectionAttempt_Returns400"
+              time="0.017">
+      <failure message="Expected HTTP 400 for input &quot;1; DROP TABLE Products;&quot; but got HTTP 200 — input sanitisation missing" />
+    </testcase>
+
+    <testcase classname="CustomerPortal.Api.Tests.SearchControllerTests"
+              name="SearchProducts_WithFilters_Returns200"
+              time="0.009" />
+
+    <testcase classname="CustomerPortal.Api.Tests.SearchControllerTests"
+              name="SearchProducts_PaginationBeyondLimit_Returns400"
+              time="0.011" />
+  </testsuite>
+
 </testsuites>
