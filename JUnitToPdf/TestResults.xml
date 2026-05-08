@@ -1,0 +1,38 @@
+<testsuites>
+  <testsuite name="VCFFileImport.Tests.dll" tests="25" skipped="0" failures="0" errors="0" time="2.9826470999999994" timestamp="2026-05-06T19:11:13" hostname="runner-xvbjm2wrc-project-70569932-concurrent-0-9kuj4n1e" id="0" package="VCFFileImport.Tests.dll">
+    <properties />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_SupplierNameWithQuotes_IsMappedAndSavedCorrectly" time="2.5539415" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_NullableDatesPopulated_MappedToCorrectDateOnly" time="0.0265679" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_OneBadRow_SkipsBadRowSavesRemainingAndReturnsFalse" time="0.1555123" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="Constructor_WhitespaceBasePath_ThrowsVcfConfigurationException" time="0.0126608" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_InvalidRequiredDate_SkipsRowAndReportsError" time="0.0230474" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_NullableDatesEmpty_MappedToNull" time="0.0123750" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_GetDataFromFile_PassesFixUnescapedQuotesTrueAndRowsToSkipZero" time="0.0126156" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_EmptyDirectory_ReturnsTrueWithNoInteractions" time="0.0224184" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;N&quot;, expected: False)" time="0.0162469" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;Y&quot;, expected: True)" time="0.0083543" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;y&quot;, expected: False)" time="0.0089429" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;YES&quot;, expected: False)" time="0.0084227" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_CardholderApproval_MapsCorrectly(raw: &quot;&quot;, expected: False)" time="0.0061796" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_DuplicateFile_ReturnsFalseAndCallsHandleFileError" time="0.0132695" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_MultipleValidFiles_AllProcessedSuccessfully" time="0.0077407" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_AccountMask_StripsAsterisksAndParsesLastSixDigits" time="0.0070329" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_WhitespaceOptionalStrings_MappedToNull" time="0.0087397" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_AllAsterisksInMask_RowSkippedAndErrorReported" time="0.0127631" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_AllRowsBad_SavesEmptyTransactionListAndReturnsFalse" time="0.0147191" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_FileServiceParseErrors_ReturnsFalseAndReportsErrors" time="0.0198618" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="Constructor_MissingBasePath_ThrowsVcfConfigurationException" time="0.0060790" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_MixedDirectory_OnlyCsvFilesProcessed" time="0.0073534" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_SingleValidFile_ReturnsTrueAndCallsHandleFileSuccess" time="0.0072778" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_HappyPath_ImportFileHasCorrectFileNames" time="0.0072061" />
+    <testcase classname="VCFFileImport.Tests.VcfServicesTests" name="ProcessFileAsync_NonCsvFilesOnly_ReturnsTrueWithNoInteractions" time="0.0033187" />
+    <system-out>
+Test Framework Informational Messages:
+[xUnit.net 00:00:00.01] xUnit.net VSTest Adapter v3.1.5+1b188a7b0a (64-bit .NET 10.0.6)
+[xUnit.net 00:00:00.41]   Discovering: VCFFileImport.Tests
+[xUnit.net 00:00:01.01]   Discovered:  VCFFileImport.Tests
+[xUnit.net 00:00:01.10]   Starting:    VCFFileImport.Tests
+[xUnit.net 00:00:04.23]   Finished:    VCFFileImport.Tests
+</system-out>
+  </testsuite>
+</testsuites>
